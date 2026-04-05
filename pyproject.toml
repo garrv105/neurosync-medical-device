@@ -1,0 +1,50 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "neurosync"
+version = "1.0.0"
+description = "Medical device monitoring application for Parkinson's disease patients"
+readme = "README.md"
+requires-python = ">=3.11"
+license = {text = "MIT"}
+authors = [
+    {name = "Garrv Sipani", email = "fgarrvs1@jh.edu"},
+]
+dependencies = [
+    "numpy>=1.24",
+    "scipy>=1.11",
+    "pydantic>=2.0",
+    "click>=8.1",
+    "fastapi>=0.104",
+    "uvicorn>=0.24",
+    "reportlab>=4.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.4",
+    "pytest-cov>=4.1",
+    "pytest-asyncio>=0.23",
+    "httpx>=0.25",
+    "ruff>=0.1",
+]
+
+[project.scripts]
+neurosync = "neurosync.cli:cli"
+
+[tool.setuptools.packages.find]
+include = ["neurosync*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "auto"
+
+[tool.ruff]
+target-version = "py311"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "N", "W"]
+ignore = ["E501"]
